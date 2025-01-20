@@ -1,1 +1,33 @@
-{"nbformat":4,"nbformat_minor":0,"metadata":{"colab":{"provenance":[],"authorship_tag":"ABX9TyNV5FVulzbbuWzLvDPaxsaH"},"kernelspec":{"name":"python3","display_name":"Python 3"},"language_info":{"name":"python"}},"cells":[{"cell_type":"code","execution_count":null,"metadata":{"id":"JJ5KLms9iXsj"},"outputs":[],"source":["import pywt\n","import matplotlib.pyplot as plt\n","\n","\n","def waveletLeafData(waveletPacket: pywt.WaveletPacket):\n","    leafData = list()\n","    leafNodes = [node.path for node in waveletPacket.get_level(\n","        waveletPacket.maxlevel, 'freq')]\n","\n","    for node in leafNodes:\n","        bandData = waveletPacket[node].data\n","        leafData.extend(bandData)\n","\n","    return leafData\n","\n","\n","def plotWavelets(wavelets: list):\n","    plt.figure()\n","    subplotIdx = 1\n","    leafNodes = [node.path for node in wavelets[0].get_level(\n","        wavelets[0].maxlevel, 'natural', False)]\n","\n","    for wavelet in wavelets:\n","        plt.subplot(len(wavelets), 1, subplotIdx)\n","        bandIdx = 0\n","        for node in leafNodes:\n","            bandData = wavelet[node].data\n","            bandLength = len(bandData)\n","            rangeArr = range(bandIdx * bandLength, (bandIdx + 1) * bandLength)\n","            plt.plot(rangeArr, bandData)\n","            bandIdx += 1\n","        subplotIdx += 1\n","    plt.show()\n"]}]}
+import pywt
+import matplotlib.pyplot as plt
+
+
+def waveletLeafData(waveletPacket: pywt.WaveletPacket):
+    leafData = list()
+    leafNodes = [node.path for node in waveletPacket.get_level(
+        waveletPacket.maxlevel, 'freq')]
+
+    for node in leafNodes:
+        bandData = waveletPacket[node].data
+        leafData.extend(bandData)
+
+    return leafData
+
+
+def plotWavelets(wavelets: list):
+    plt.figure()
+    subplotIdx = 1
+    leafNodes = [node.path for node in wavelets[0].get_level(
+        wavelets[0].maxlevel, 'natural', False)]
+
+    for wavelet in wavelets:
+        plt.subplot(len(wavelets), 1, subplotIdx)
+        bandIdx = 0
+        for node in leafNodes:
+            bandData = wavelet[node].data
+            bandLength = len(bandData)
+            rangeArr = range(bandIdx * bandLength, (bandIdx + 1) * bandLength)
+            plt.plot(rangeArr, bandData)
+            bandIdx += 1
+        subplotIdx += 1
+    plt.show()

@@ -1,1 +1,17 @@
-{"nbformat":4,"nbformat_minor":0,"metadata":{"colab":{"provenance":[],"authorship_tag":"ABX9TyO/uFPR8HhnRzRbgU2V4xn1"},"kernelspec":{"name":"python3","display_name":"Python 3"},"language_info":{"name":"python"}},"cells":[{"cell_type":"code","execution_count":null,"metadata":{"id":"9Xa7S9CxgQq-"},"outputs":[],"source":["<meta charset=\"UTF-8\">\n","<title>Simple Recorder.js demo with record, stop and pause</title>\n","<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n","<div id=\"controls\">\n","    <button id=\"recordButton\">Record</button>\n","    <button id=\"pauseButton\" disabled>Pause</button>\n","    <button id=\"stopButton\" disabled>Stop and convert</button>\n","</div>\n","<h3>Recordings</h3>\n","<ol id=\"recordingsList\"></ol>\n","<br>\n","<h3 style=\"display: none;\" id = \"procesing\">Processing ...</h3>\n","<h3 style=\"display: none;\" id = \"player_text\">Converted File</h3>\n","<audio id=\"player\" controls style=\"display: none;\"></audio>\n","<!-- inserting these scripts at the end to be able to use all the elements in the DOM -->\n","<script src=\"https://cdnjs.cloudflare.com/ajax/libs/recorderjs/0.1.0/recorder.js\"></script>\n","<script type=\"module\" src=\"../static/script.js\"></script>\n"]}]}
+<meta charset="UTF-8">
+<title>Simple Recorder.js demo with record, stop and pause</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div id="controls">
+    <button id="recordButton">Record</button>
+    <button id="pauseButton" disabled>Pause</button>
+    <button id="stopButton" disabled>Stop and convert</button>
+</div>
+<h3>Recordings</h3>
+<ol id="recordingsList"></ol>
+<br>
+<h3 style="display: none;" id = "procesing">Processing ...</h3>
+<h3 style="display: none;" id = "player_text">Converted File</h3>
+<audio id="player" controls style="display: none;"></audio>
+<!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/recorderjs/0.1.0/recorder.js"></script>
+<script type="module" src="../static/script.js"></script>

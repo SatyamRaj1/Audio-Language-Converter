@@ -1,1 +1,52 @@
-{"nbformat":4,"nbformat_minor":0,"metadata":{"colab":{"provenance":[],"authorship_tag":"ABX9TyOaE97QnJ1PuvgfNTT2Xlif"},"kernelspec":{"name":"python3","display_name":"Python 3"},"language_info":{"name":"python"}},"cells":[{"cell_type":"code","execution_count":null,"metadata":{"id":"45_sbS9viEgK"},"outputs":[],"source":["import numpy as np\n","import pywt\n","import soundfile\n","from tqdm import tqdm\n","from noiseProfiler import NoiseProfiler\n","\n","\n","def mad(arr):\n","    arr = np.ma.array(arr).compressed()\n","    med = np.median(arr)\n","    return np.median(np.abs(arr - med))\n","\n","\n","\n","\n","class AudioDeNoise:\n","\n","    def __init__(self, inputFile):\n","        self.__inputFile = inputFile\n","        self.__noiseProfile = None\n","\n","    def deNoise(self, outputFile):\n","        \"\"\"\n","        outputFile : str\n","            de-noised file name\n","\n","        \"\"\"\n","        info = soundfile.info(self.__inputFile)  # getting info of the audio\n","        rate = info.samplerate\n","\n","        with soundfile.SoundFile(outputFile, \"w\", samplerate=rate, channels=info.channels) as of:\n","            for block in tqdm(soundfile.blocks(self.__inputFile, int(rate * info.duration * 0.10))):\n","                coefficients = pywt.wavedec(block, 'db4', mode='per', level=2)\n","\n","                #  getting variance of the input signal\n","                sigma = mad(coefficients[- 1])\n","\n","                # VISU Shrink thresholding by applying the universal threshold proposed by Donoho and Johnstone\n","                thresh = sigma * np.sqrt(2 * np.log(len(block)))\n","\n","                # thresholding using the noise threshold generated\n","                coefficients[1:] = (pywt.threshold(i, value=thresh, mode='soft') for i in coefficients[1:])\n","\n","                # getting the clean signal as in original form and writing to the file\n","                clean = pywt.waverec(coefficients, 'db4', mode='per')\n","                of.write(clean)\n","\n","def denoiseAudio(input_file):\n","    output_file = \"./uploads/denoised.wav\"\n","    DenoisingObject = AudioDeNoise(input_file)\n","    DenoisingObject.deNoise(output_file)\n","    return output_file"]}]}
+import numpy as np
+import pywt
+import soundfile
+from tqdm import tqdm
+from noiseProfiler import NoiseProfiler
+
+
+def mad(arr):
+    arr = np.ma.array(arr).compressed()
+    med = np.median(arr)
+    return np.median(np.abs(arr - med))
+
+
+
+
+class AudioDeNoise:
+
+    def __init__(self, inputFile):
+        self.__inputFile = inputFile
+        self.__noiseProfile = None
+
+    def deNoise(self, outputFile):
+        """
+        outputFile : str
+            de-noised file name
+
+        """
+        info = soundfile.info(self.__inputFile)  # getting info of the audio
+        rate = info.samplerate
+
+        with soundfile.SoundFile(outputFile, "w", samplerate=rate, channels=info.channels) as of:
+            for block in tqdm(soundfile.blocks(self.__inputFile, int(rate * info.duration * 0.10))):
+                coefficients = pywt.wavedec(block, 'db4', mode='per', level=2)
+
+                #  getting variance of the input signal
+                sigma = mad(coefficients[- 1])
+
+                # VISU Shrink thresholding by applying the universal threshold proposed by Donoho and Johnstone
+                thresh = sigma * np.sqrt(2 * np.log(len(block)))
+
+                # thresholding using the noise threshold generated
+                coefficients[1:] = (pywt.threshold(i, value=thresh, mode='soft') for i in coefficients[1:])
+
+                # getting the clean signal as in original form and writing to the file
+                clean = pywt.waverec(coefficients, 'db4', mode='per')
+                of.write(clean)
+
+def denoiseAudio(input_file):
+    output_file = "./uploads/denoised.wav"
+    DenoisingObject = AudioDeNoise(input_file)
+    DenoisingObject.deNoise(output_file)
+    return output_file

@@ -1,1 +1,60 @@
-{"nbformat":4,"nbformat_minor":0,"metadata":{"colab":{"provenance":[],"authorship_tag":"ABX9TyMoWCTpgsnRTImfJnbU0inf"},"kernelspec":{"name":"python3","display_name":"Python 3"},"language_info":{"name":"python"}},"cells":[{"cell_type":"code","execution_count":null,"metadata":{"id":"PI0B1ZxZiPlu"},"outputs":[],"source":["\"\"\"\n","A python linked list implementation\n","relying on http://ls.pwd.io/2014/08/singly-and-doubly-linked-lists-in-python/\n","\"\"\"\n","\n","\n","class Node:\n","\n","    def __init__(self, data, prev=None, next=None):\n","        self.data = data\n","        self.prev = prev\n","        self.next = next\n","\n","    def getNextWithValidData(self):\n","        current = self.next\n","        while current is not None:\n","            if current.data is not None:\n","                return current\n","            current = current.next\n","\n","        return None\n","\n","    def getPrevWithValidData(self):\n","        current = self.prev\n","        while current is not None:\n","            if current.data is not None:\n","                return current\n","            current = current.prev\n","\n","        return None\n","\n","\n","class LinkedList:\n","\n","    def __init__(self):\n","        self.first = None  # head\n","        self.last = None  # tail\n","        self.__list = None\n","\n","    def append(self, data):\n","        new_node = Node(data, None, None)\n","        if self.first is None:\n","            self.first = self.last = new_node\n","            self.__list = list()\n","        else:\n","            new_node.prev = self.last\n","            new_node.next = None\n","            self.last.next = new_node\n","            self.last = new_node\n","\n","        self.__list.append(new_node)\n","\n","    def getAsList(self):\n","        ret = list()\n","        current = self.first\n","        while current is not None:\n","            ret.append(current)\n","            current = current.next\n","\n","        return ret\n"]}]}
+"""
+A python linked list implementation
+relying on http://ls.pwd.io/2014/08/singly-and-doubly-linked-lists-in-python/
+"""
+
+
+class Node:
+
+    def __init__(self, data, prev=None, next=None):
+        self.data = data
+        self.prev = prev
+        self.next = next
+
+    def getNextWithValidData(self):
+        current = self.next
+        while current is not None:
+            if current.data is not None:
+                return current
+            current = current.next
+
+        return None
+
+    def getPrevWithValidData(self):
+        current = self.prev
+        while current is not None:
+            if current.data is not None:
+                return current
+            current = current.prev
+
+        return None
+
+
+class LinkedList:
+
+    def __init__(self):
+        self.first = None  # head
+        self.last = None  # tail
+        self.__list = None
+
+    def append(self, data):
+        new_node = Node(data, None, None)
+        if self.first is None:
+            self.first = self.last = new_node
+            self.__list = list()
+        else:
+            new_node.prev = self.last
+            new_node.next = None
+            self.last.next = new_node
+            self.last = new_node
+
+        self.__list.append(new_node)
+
+    def getAsList(self):
+        ret = list()
+        current = self.first
+        while current is not None:
+            ret.append(current)
+            current = current.next
+
+        return ret
