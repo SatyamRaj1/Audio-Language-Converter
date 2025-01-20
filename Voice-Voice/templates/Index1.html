@@ -1,1 +1,58 @@
-{"nbformat":4,"nbformat_minor":0,"metadata":{"colab":{"provenance":[],"authorship_tag":"ABX9TyMA1KqiTdTRMxUaqyPrTjZU"},"kernelspec":{"name":"python3","display_name":"Python 3"},"language_info":{"name":"python"}},"cells":[{"cell_type":"code","execution_count":null,"metadata":{"id":"rdtF7AXLgDyl"},"outputs":[],"source":["<!DOCTYPE html>\n","<html lang=\"en\">\n","<head>\n","    <meta charset=\"UTF-8\">\n","    <title>Simple Recorder.js Demo - Multilingual Translation</title>\n","    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n","    <link rel=\"stylesheet\" href=\"../static/style1.css\">\n","</head>\n","<body>\n","    <div class=\"card\">\n","    <h1>Multilingual Translation</h1>\n","\n","    <!-- Language selection dropdowns -->\n","    <div id=\"language-selection\">\n","        <label class = \"lable\" for=\"fromLanguage\">From: </label>\n","        <select id=\"fromLanguage\">\n","            <option value=\"eng\" selected>English</option>\n","            <option value=\"hin\">Hindi</option>\n","            <option value=\"ben\">Bengali</option>\n","            <option value=\"mar\">Marathi</option>\n","            <option value=\"urd\">Urdu</option>\n","            <option value=\"tel\">Telugu</option>\n","            <option value=\"deu\">German</option>\n","            <option value=\"fra\">French</option>\n","        </select>\n","\n","        <label class = \"lable\" for=\"toLanguage\">To: </label>\n","        <select id=\"toLanguage\">\n","            <option value=\"hin\" selected>Hindi</option>\n","            <option value=\"eng\">English</option>\n","            <option value=\"urd\">Urdu</option>\n","            <option value=\"tel\">Telugu</option>\n","            <option value=\"ben\">Bengali</option>\n","            <option value=\"fr\">French</option>\n","            <option value=\"de\">German</option>\n","            <!-- Add more language options as needed -->\n","        </select>\n","    </div>\n","\n","    <!-- Recorder Controls -->\n","    <div id=\"controls\">\n","        <button id=\"recordButton\">Record</button>\n","        <button id=\"pauseButton\" disabled>Pause</button>\n","        <button id=\"stopButton\" disabled>Stop and Convert</button>\n","    </div>\n","\n","    <h3>Recordings</h3>\n","    <audio id=\"player1\" style=\"display: none;\" controls></audio>\n","\n","    <h3 id=\"procesing\" style=\"display: none;\">Processing...</h3>\n","    <h3 id=\"player_text\" style=\"display: none;\">Converted File</h3>\n","    <audio id=\"player\" style=\"display: none;\" controls></audio>\n","    </div>\n","    <!-- Inserting these scripts at the end to use all DOM elements -->\n","    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/recorderjs/0.1.0/recorder.js\"></script>\n","    <script type=\"module\" src=\"../static/script1.js\"></script>\n","</body>\n","</html>\n"]}]}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Recorder.js Demo - Multilingual Translation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style1.css">
+</head>
+<body>
+    <div class="card">
+    <h1>Multilingual Translation</h1>
+
+    <!-- Language selection dropdowns -->
+    <div id="language-selection">
+        <label class = "lable" for="fromLanguage">From: </label>
+        <select id="fromLanguage">
+            <option value="eng" selected>English</option>
+            <option value="hin">Hindi</option>
+            <option value="ben">Bengali</option>
+            <option value="mar">Marathi</option>
+            <option value="urd">Urdu</option>
+            <option value="tel">Telugu</option>
+            <option value="deu">German</option>
+            <option value="fra">French</option>
+        </select>
+
+        <label class = "lable" for="toLanguage">To: </label>
+        <select id="toLanguage">
+            <option value="hin" selected>Hindi</option>
+            <option value="eng">English</option>
+            <option value="urd">Urdu</option>
+            <option value="tel">Telugu</option>
+            <option value="ben">Bengali</option>
+            <option value="fr">French</option>
+            <option value="de">German</option>
+            <!-- Add more language options as needed -->
+        </select>
+    </div>
+
+    <!-- Recorder Controls -->
+    <div id="controls">
+        <button id="recordButton">Record</button>
+        <button id="pauseButton" disabled>Pause</button>
+        <button id="stopButton" disabled>Stop and Convert</button>
+    </div>
+
+    <h3>Recordings</h3>
+    <audio id="player1" style="display: none;" controls></audio>
+
+    <h3 id="procesing" style="display: none;">Processing...</h3>
+    <h3 id="player_text" style="display: none;">Converted File</h3>
+    <audio id="player" style="display: none;" controls></audio>
+    </div>
+    <!-- Inserting these scripts at the end to use all DOM elements -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/recorderjs/0.1.0/recorder.js"></script>
+    <script type="module" src="../static/script1.js"></script>
+</body>
+</html>
